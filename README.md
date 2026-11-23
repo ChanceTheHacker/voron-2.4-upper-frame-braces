@@ -18,8 +18,10 @@ it found.
 - [Why brace the top corners](#why-brace-the-top-corners)
 - [Compatibility](#compatibility)
 - [What to print](#what-to-print)
+- [Telling the braces apart](#telling-the-braces-apart)
 - [What you need](#what-you-need)
 - [Fitting](#fitting)
+- [Pictures of each corner](#pictures-of-each-corner)
 - [Check the clearances on your printer](#check-the-clearances-on-your-printer)
 - [Clearances in the CAD model](#clearances-in-the-cad-model)
 - [Limitations](#limitations)
@@ -108,6 +110,34 @@ around each screw, because the M5 screw hole is almost as wide as the key.
 - Print flat, exactly as the file is oriented, with the broad flat face on the bed. No supports:
   the screw holes have pointed roofs that bridge cleanly, and the keys have 45 degree sides.
 
+## Telling the braces apart
+
+![The seven brace files, each drawn the way it goes in](Images/identify.png)
+
+There are seven files and eight places, and several braces look alike once printed. Each brace
+has a **top leg**, which goes under the top bar, and an **upright leg**, which goes against the
+corner post. Hold a brace with its broad flat face (the one that was on the print bed) towards
+you and the top leg level along the top, as in the pictures, and work down this list:
+
+1. **Curved edge:** a front brace. Its top leg is only 42 mm long.
+2. **Upright leg 41 mm instead of 50 mm:** the rear-right side brace.
+3. **Notch in the top leg:** a side brace. **No notch:** a rear brace. The notch is on the screw
+   side: the edge of the top leg is cut back 1.5 mm for about 33 mm next to the corner, to give
+   the Z belt more room where it runs beside its pulley. It is easiest to see looking straight
+   down on the top leg.
+4. **Which side the upright leg is on** then tells you which one it is:
+
+| Kind | Upright leg on the right | Upright leg on the left |
+| --- | --- | --- |
+| Side, with notch | front-left; rear-right (41 mm upright leg) | front-right and rear-left (the `x2` file, both the same) |
+| Front, curved | front-right | front-left |
+| Rear, no notch | rear-left | rear-right |
+
+The look-alikes to watch for are the side brace for the front-left corner and the optional rear-left
+brace, and the `x2` side brace and the optional rear-right brace: in each pair only the notch differs.
+A side brace fitted in a rear corner is fine, but a rear brace fitted in a side corner has less
+room beside the Z belt, so keep the notched ones for the sides.
+
 ## What you need
 
 For **each brace**:
@@ -142,8 +172,9 @@ For **each brace**:
 1. Hold the panel, its trim and any foam up to the frame at that corner first, and check they
    still sit normally there. Note anything that might be in the way, such as panel clips or a
    door hinge.
-2. Find the right brace for the corner from the table and the map above.
-3. Put the long leg under the top bar and the other leg against the corner post, on the face of
+2. Find the right brace for the corner: see [Telling the braces apart](#telling-the-braces-apart)
+   and the [pictures of each corner](#pictures-of-each-corner).
+3. Put the top leg under the top bar and the upright leg against the corner post, on the face of
    the post that looks along that same bar towards its middle. For the side braces, that means
    behind the post at the front corners and in front of the post at the rear corners. The broad
    flat face (the one that was on the print bed) faces the panel on that side, and the screw
@@ -170,6 +201,124 @@ arched so that the toolhead can pass under them.
 
 ![The arched front braces](Images/fitted_front.png)
 ![A rear brace fitted, at full height](Images/fitted_rear.png)
+
+## Pictures of each corner
+
+One picture for each of the eight places, to compare with the brace in your hand before you
+fit it. The left-hand view is from outside the printer, with the brace's flat face towards
+you; the right-hand view is from inside, looking up into the corner at the screw side. The
+small map shows the frame from above, front at the bottom, with this brace in green. Each
+section opens when you click its title.
+
+<details>
+<summary><b>Front-left corner: side brace</b></summary>
+
+![Front-left corner: side brace](Images/install/1_side_front_left.png)
+
+File: `upper_brace_side_front_left.stl`, print one.
+
+- Straight sloping edge, notch in the top leg, upright leg on the right.
+- Looks like the optional rear-left brace, which has no notch.
+- Top leg under the left top side bar; upright leg against the back face of the front-left post.
+- Flat face towards the left side panel; the screws go in from inside the printer.
+
+</details>
+
+<details>
+<summary><b>Front-right corner: side brace</b></summary>
+
+![Front-right corner: side brace](Images/install/2_side_front_right.png)
+
+File: `upper_brace_side_front_right_rear_left_x2.stl`, print two: one for here and one for the rear-left corner.
+
+- Straight sloping edge, notch in the top leg, upright leg on the left.
+- Identical to the rear-left side brace. Looks like the optional rear-right brace, which has no notch.
+- Top leg under the right top side bar; upright leg against the back face of the front-right post.
+- Flat face towards the right side panel; the screws go in from inside the printer.
+
+</details>
+
+<details>
+<summary><b>Rear-left corner: side brace</b></summary>
+
+![Rear-left corner: side brace](Images/install/3_side_rear_left.png)
+
+File: `upper_brace_side_front_right_rear_left_x2.stl`, the second of the two.
+
+- Straight sloping edge, notch in the top leg, upright leg on the left.
+- Identical to the front-right side brace. Looks like the optional rear-right brace, which has no notch.
+- Top leg under the left top side bar; upright leg against the front face of the rear-left post.
+- Flat face towards the left side panel; the screws go in from inside the printer.
+
+</details>
+
+<details>
+<summary><b>Rear-right corner: side brace</b></summary>
+
+![Rear-right corner: side brace](Images/install/4_side_rear_right.png)
+
+File: `upper_brace_side_rear_right.stl`, print one.
+
+- The only brace with a 41 mm upright leg; on all the others it is 50 mm. Notch in the top leg, upright leg on the right.
+- **Leave it off if your printer has Voron's stock Y cable chain**: the chain hits it near the back at full height.
+- Top leg under the right top side bar; upright leg against the front face of the rear-right post.
+- Flat face towards the right side panel; the screws go in from inside the printer.
+
+</details>
+
+<details>
+<summary><b>Front-left corner: front brace (optional)</b></summary>
+
+![Front-left corner: front brace (optional)](Images/install/5_front_left.png)
+
+File: `upper_brace_front_left.stl`, print one.
+
+- Curved edge, top leg 42 mm, upright leg on the left.
+- Top leg under the front top bar, above the doors; upright leg against the right-hand face of the front-left post, as you face the printer.
+- Flat face towards the front; the screws go in from inside the printer.
+
+</details>
+
+<details>
+<summary><b>Front-right corner: front brace (optional)</b></summary>
+
+![Front-right corner: front brace (optional)](Images/install/6_front_right.png)
+
+File: `upper_brace_front_right.stl`, print one.
+
+- Curved edge, top leg 42 mm, upright leg on the right.
+- Top leg under the front top bar, above the doors; upright leg against the left-hand face of the front-right post, as you face the printer.
+- Flat face towards the front; the screws go in from inside the printer.
+
+</details>
+
+<details>
+<summary><b>Rear-left corner: rear brace (optional)</b></summary>
+
+![Rear-left corner: rear brace (optional)](Images/install/7_rear_left.png)
+
+File: `upper_brace_rear_left.stl`, print one.
+
+- Straight sloping edge, no notch, upright leg on the right.
+- Looks like the front-left side brace, which has the notch.
+- Top leg under the rear top bar; upright leg against the right-hand face of the rear-left post, as you face the printer from the front.
+- Flat face towards the back panel; the screws go in from inside the printer.
+
+</details>
+
+<details>
+<summary><b>Rear-right corner: rear brace (optional)</b></summary>
+
+![Rear-right corner: rear brace (optional)](Images/install/8_rear_right.png)
+
+File: `upper_brace_rear_right.stl`, print one.
+
+- Straight sloping edge, no notch, upright leg on the left.
+- Looks like the front-right and rear-left side braces, which have the notch.
+- Top leg under the rear top bar; upright leg against the left-hand face of the rear-right post, as you face the printer from the front.
+- Flat face towards the back panel; the screws go in from inside the printer.
+
+</details>
 
 ## Check the clearances on your printer
 

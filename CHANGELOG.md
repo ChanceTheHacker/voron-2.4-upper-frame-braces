@@ -1,5 +1,12 @@
 # Changes
 
+## Fitting pictures, 2026-11-23
+
+A picture for each of the eight places a brace goes, with notes on how to recognise that brace
+and where it sits, and a chart of all seven files drawn the way they go in, to tell the
+look-alikes apart. The README calls the two legs the top leg and the upright leg, because on
+the front braces the leg under the bar is the shorter one. The brace files have not changed.
+
 ## Version 2, 2026-11-23
 
 Centring keys, as on Voron's own frame-mounted parts. Each leg has a rib 5.8 mm wide and 1 mm
