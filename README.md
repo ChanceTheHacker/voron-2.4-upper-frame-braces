@@ -90,14 +90,23 @@ Left and right are as seen standing in front of the printer.
 | `STLs/Rear_Optional/upper_brace_rear_right.stl` | rear-right corner, under the rear bar | 1 |
 
 The side braces are 65 mm along the bar, 50 mm down the post (41 mm for the rear-right one) and
-15 mm wide. The rear braces are 65 by 50 by 15 mm and the front braces 42 by 50 by 15 mm.
+15 mm wide. The rear braces are 65 by 50 by 15 mm and the front braces 42 by 50 by 15 mm. These
+sizes do not count the keys.
+
+### Centring keys
+
+As on Voron's own parts that sit against the frame, each leg has a key on the face that goes
+against the extrusion: a rib 5.8 mm wide and 1 mm high that drops into the extrusion's 6 mm
+slot opening and centres the brace on the slot. It is the same size as the keys on Voron's Z
+idlers. Like the keys on Voron's skirts, it runs the length of the leg and is broken only
+around each screw, because the M5 screw hole is almost as wide as the key.
 
 ### Print settings
 
 - ABS or ASA.
 - 0.2 mm layers, 5 walls, **100 % infill**. These parts carry load, so print them solid.
 - Print flat, exactly as the file is oriented, with the broad flat face on the bed. No supports:
-  the screw holes have pointed roofs that bridge cleanly.
+  the screw holes have pointed roofs that bridge cleanly, and the keys have 45 degree sides.
 
 ## What you need
 
@@ -106,7 +115,10 @@ For **each brace**:
 - 4 × M5 × 10 mm button-head screws. The length is measured under the head. Do not use longer
   screws: they bottom out in the slot and feel tight without clamping the brace.
 - 4 × M5 roll-in or drop-in T-nuts for 2020 extrusion (6 mm slot). Nuts no larger than
-  13 × 7.7 × 4.3 mm are what was checked in CAD; larger ones may touch the idler mounts.
+  13 × 7.7 × 4.3 mm are what was checked in CAD; larger ones may touch the idler mounts. The
+  keys pass over the nuts: Voron's T-nut leaves 0.4 mm under a key, as it does under Voron's
+  Z idlers. A nut whose neck rises higher into the slot opening would hold the brace off the
+  frame, so check that each leg sits flat.
 - A 3 mm hex key with a straight shaft, long enough to reach through the brace's screw pockets.
 
 | What you fit | Screws | T-nuts |
@@ -136,12 +148,15 @@ For **each brace**:
    behind the post at the front corners and in front of the post at the rear corners. The broad
    flat face (the one that was on the print bed) faces the panel on that side, and the screw
    pockets open into the printer.
-4. Offer the brace up without screws and check the holes line up with the slots, and that the
-   screw heads and T-nuts will not meet the idlers, their bolts or any other hardware nearby.
+4. Offer the brace up without screws, with the key on each leg in its slot, and check the holes
+   line up with the slots, and that the screw heads and T-nuts will not meet the idlers, their
+   bolts or any other hardware nearby.
 5. Roll or drop the four T-nuts into the slots from the open face, two in the bar and two in the
    post, and start all four screws loosely by hand.
-6. Push the brace firmly into the corner, so both legs sit flat against the frame, and tighten
-   the four screws with the hex key through the pockets: firm, but do not crush the plastic.
+6. Seat both keys in their slots and push the brace firmly into the corner, so both legs sit
+   flat against the frame, and tighten the four screws with the hex key through the pockets:
+   firm, but do not crush the plastic. If a leg will not sit flat, a T-nut is probably under
+   its key; see [What you need](#what-you-need).
    If a screw feels tight while the brace can still move, it has probably bottomed out; check
    the screw length and the T-nut.
 7. Never move or loosen the Z belt idlers to make a brace fit. If a brace touches an idler,
@@ -206,6 +221,8 @@ builder sets the X and Y zero points.
   nut is about 2.9 mm from a brace's nut.
 - The stock door hinge and its tape stay at least 4.4 mm from the front braces through the
   door's full outward swing.
+- The keys sit inside the slot openings under the braces, so they do not change any gap in
+  this section. They clear the extrusions, and Voron's T-nuts by 0.4 mm.
 
 ### With the Beefy front and Z idlers (350 mm build)
 

@@ -7,6 +7,14 @@ broad face nearest the corresponding outside panel. The mirrored parts keep
 this face outwards in every corner. The pointed roofs on the horizontal screw
 holes print without supports, and the open head pockets admit a straight hex key.
 
+As on Voron's own frame-mounted parts, each leg carries a key that sits in the
+extrusion's slot opening to centre the brace on the slot. It is 5.8 mm wide and
+1 mm high, like the keys on Voron's Z idlers, with 45 degree flanks so that it
+prints without supports. It runs the length of the leg and is broken only
+around each screw, as the keys on Voron's skirts are, because the M5 screw hole
+is almost as wide as the key. The key passes over the T-nuts: under Voron's
+drop-in T-nut it leaves 0.4 mm, the same as on Voron's Z idlers.
+
 Usage (from the repository root):
     uv run --with manifold3d==3.5.5 --with numpy==2.5.5 python -I CAD/make_braces.py [STL_DIR]
     STL_DIR defaults to the repository's STLs folder; the files are written
@@ -41,6 +49,12 @@ FIRST_LAYER_BEVEL = 0.35
 WEB_BEVEL = 0.7
 HOLE_RADIUS = 2.8
 HEAD_SPACE_RADIUS = 5.3  # 9.5 mm M5 button head, plus room to drop it in
+KEY_WIDTH = 5.8      # at the brace face; Voron's slot opening is 6.0 mm
+KEY_HEIGHT = 1.0     # into the slot opening; Voron's slot lips are 2.0 mm thick
+KEY_STRAIGHT = 0.3   # full-width depth before the 45 degree flanks start
+KEY_CLEAR = 4.5      # from a screw centre: 1.7 mm of flat face around the hole
+KEY_START = 1.5      # from the inside corner
+KEY_MIN = 3.0        # shorter stretches between screws get no key
 
 
 def trimmed_extrusion(outline, height, top_bevel):
@@ -88,6 +102,35 @@ def front_curve():
     return np.vstack((a, b[1:]))
 
 
+def key_spans(length, seats):
+    """Stretches of a leg's frame face between the screw holes."""
+    spans, start = [], KEY_START
+    for seat in sorted(seats):
+        if seat - KEY_CLEAR - start >= KEY_MIN:
+            spans.append((start, seat - KEY_CLEAR))
+        start = max(start, seat + KEY_CLEAR)
+    # The frame face ends 1.5 mm short of the leg's tip; stop 0.5 mm inside it.
+    if length - 2.0 - start >= KEY_MIN:
+        spans.append((start, length - 2.0))
+    return spans
+
+
+def slot_key(start, end, in_bar):
+    """A key on the bar's (y = 0) or the post's (x = 0) frame face.
+
+    The key's root is buried 0.5 mm in the flange so that it fuses with it.
+    Both flanks and both ends slope at 45 degrees after the straight part.
+    """
+    taper = KEY_HEIGHT - KEY_STRAIGHT
+    points = []
+    for depth, inset in ((-0.5, 0.0), (KEY_STRAIGHT, 0.0), (KEY_HEIGHT, taper)):
+        for along in (start + inset, end - inset):
+            for across in (-KEY_WIDTH / 2 + inset, KEY_WIDTH / 2 - inset):
+                z = SLOT_CENTRE + across
+                points.append((along, -depth, z) if in_bar else (-depth, along, z))
+    return m3.Manifold.hull_points(np.asarray(points, dtype=np.float64))
+
+
 def build(bar, post, *, arch=False, post_seats=None):
     trim = 1.5
     # Leave 1 mm at the inside corner for the extrusion edges' radius or a burr.
@@ -118,6 +161,8 @@ def build(bar, post, *, arch=False, post_seats=None):
             seats = FRONT_BAR_SEATS
         elif not in_bar and post_seats is not None:
             seats = post_seats
+        for start, end in key_spans(length, seats):
+            solid += slot_key(start, end, in_bar)
         for at in seats:
             solid -= across_flange(shaft, at, -1.0, FLANGE + 2.0, in_bar)
             solid -= across_flange(head, at, FLANGE, reach, in_bar)
@@ -189,8 +234,8 @@ def main():
     for folder, name, position, part in parts:
         path = args.output_dir / folder / name
         path.parent.mkdir(parents=True, exist_ok=True)
-        # The header wording is kept exactly as in the first released files,
-        # so a rebuild with the default sizes is byte-identical to them.
+        # The header wording is kept exactly as in the released files, so a
+        # rebuild with the default sizes is byte-identical to the STLs folder.
         unit = 'millimetres' if position.startswith('rear-') else 'mm'
         save_stl(part, path, f"Voron upper {position.replace('-', ' ')} brace, {unit}, print flat as supplied")
         print(f'{folder}/{name}: {part.volume() / 1000:.1f} cm³')
